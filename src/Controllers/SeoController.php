@@ -1,6 +1,6 @@
 <?php
 
-namespace bertugfahriozer\ci4SeoPro\Controllers;
+namespace bertugfahriozer\ci4seopro\Controllers;
 
 use Bertug\SeoPro\Config\Seo as SeoConfig;
 use Bertug\SeoPro\Services\HttpCache;
@@ -141,10 +141,10 @@ class SeoController extends \CodeIgniter\Controller
             if (empty($items)) {
                 $items[] = [
                     'title' => 'Hello World',
-                    'link'  => rtrim($this->cfg->siteUrl,'/') . '/hello-world',
+                    'link'  => rtrim($this->cfg->siteUrl, '/') . '/hello-world',
                     'desc'  => 'First item',
                     'date'  => time(),
-                    'author'=> $this->cfg->contactEmail,
+                    'author' => $this->cfg->contactEmail,
                 ];
             }
             $builder = new RssBuilder($this->cfg);

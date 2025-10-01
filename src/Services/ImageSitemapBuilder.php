@@ -1,8 +1,8 @@
 <?php
 
-namespace bertugfahriozer\ci4SeoPro\Services;
+namespace bertugfahriozer\ci4seopro\Services;
 
-use bertugfahriozer\ci4SeoPro\Config\Seo;
+use bertugfahriozer\ci4seopro\Config\Seo;
 
 class ImageSitemapBuilder
 {
@@ -21,7 +21,7 @@ class ImageSitemapBuilder
             foreach (($it['images'] ?? []) as $img) {
                 $image = $url->addChild('image:image', null, 'http://www.google.com/schemas/sitemap-image/1.1');
                 $image->addChild('image:loc', htmlspecialchars((string)($img['loc'] ?? ''), ENT_XML1), 'http://www.google.com/schemas/sitemap-image/1.1');
-                foreach (['caption','title','geo_location','license'] as $k) {
+                foreach (['caption', 'title', 'geo_location', 'license'] as $k) {
                     if (!empty($img[$k])) {
                         $image->addChild('image:' . $k, htmlspecialchars((string)$img[$k], ENT_XML1), 'http://www.google.com/schemas/sitemap-image/1.1');
                     }

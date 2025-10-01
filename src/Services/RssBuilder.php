@@ -1,8 +1,8 @@
 <?php
 
-namespace bertugfahriozer\ci4SeoPro\Services;
+namespace bertugfahriozer\ci4seopro\Services;
 
-use bertugfahriozer\ci4SeoPro\Config\Seo;
+use bertugfahriozer\ci4seopro\Config\Seo;
 
 class RssBuilder
 {

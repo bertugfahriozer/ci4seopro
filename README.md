@@ -6,34 +6,40 @@
 
 ## Overview
 
-ci4SeoPro is a comprehensive SEO solution for CodeIgniter 4 applications. It provides professional SEO features including sitemap generation, RSS feed creation, robots.txt management, and AI indexing policies.
+ci4seopro is a comprehensive SEO solution for CodeIgniter 4 applications. It provides professional SEO features including sitemap generation, RSS feed creation, robots.txt management, and AI indexing policies.
 
 ## Features
 
 - **Comprehensive Sitemap Generation**:
+
   - Standard sitemap with configurable chunking
   - News sitemap for Google News
   - Image sitemap for Google Images
   - Video sitemap for Google Videos
 
 - **Robots.txt Management**:
+
   - Configurable allow/disallow rules
   - AI-specific policies
   - Automatic inclusion of sitemap references
 
 - **RSS Feed Generation**:
+
   - Customizable RSS feed with items from your application
 
 - **SEO Metadata Helper**:
+
   - Generates Open Graph and Twitter Card meta tags
   - Supports multilingual content
   - Configurable default values
 
 - **AI/LLM Policies**:
+
   - Dedicated AI.txt endpoint
   - Configurable allow/disallow policies for AI crawlers
 
 - **Caching System**:
+
   - HTTP caching with ETag and Last-Modified headers
   - Application-level caching for performance optimization
 
@@ -46,7 +52,7 @@ ci4SeoPro is a comprehensive SEO solution for CodeIgniter 4 applications. It pro
 You can install the package via Composer:
 
 ```bash
-composer require bertugfahriozer/ci4SeoPro
+composer require bertugfahriozer/ci4seopro
 ```
 
 ## Configuration
@@ -54,7 +60,7 @@ composer require bertugfahriozer/ci4SeoPro
 After installation, publish the configuration file:
 
 ```bash
-php spark publish:ci4SeoPro
+php spark publish:ci4seopro
 ```
 
 This will create a `Seo.php` configuration file in your `app/Config` directory.
@@ -240,8 +246,8 @@ For e-commerce sites, the package includes special features:
 
 ## Support
 
-If you encounter any issues or have questions, please open an issue on the [GitHub repository](https://github.com/bertugfahriozer/ci4SeoPro).
+If you encounter any issues or have questions, please open an issue on the [GitHub repository](https://github.com/bertugfahriozer/ci4seopro).
 
 ## License
 
-The ci4SeoPro package is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+The ci4seopro package is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).

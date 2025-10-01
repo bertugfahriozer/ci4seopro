@@ -1,6 +1,6 @@
 <?php
 
-namespace bertugfahriozer\ci4SeoPro\Services;
+namespace bertugfahriozer\ci4seopro\Services;
 
 use CodeIgniter\HTTP\ResponseInterface;
 

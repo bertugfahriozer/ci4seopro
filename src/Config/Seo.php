@@ -1,6 +1,6 @@
 <?php
 
-namespace bertugfahriozer\ci4SeoPro\Config;
+namespace bertugfahriozer\ci4seopro\Config;
 
 use CodeIgniter\Config\BaseConfig;
 
@@ -10,7 +10,7 @@ class Seo extends BaseConfig
     public string $siteDescription = 'High-quality content.';
     public string $siteUrl = 'https://example.com';
     public string $defaultLocale = 'tr';
-    public array  $locales = ['tr','en'];
+    public array  $locales = ['tr', 'en'];
     public array  $localeDomains = [];
     public string $defaultImage = 'https://example.com/assets/og-default.jpg';
     public string $twitterSite  = '@example';
@@ -26,7 +26,7 @@ class Seo extends BaseConfig
 
     public bool $serveLlms = true;
     public string $llmsPath = '/llms.txt';
-    public array $aiUserAgents = ['GPTBot','CCBot','ClaudeBot','Claude-Web','PerplexityBot','Amazonbot','Bytespider','Google-Extended','GoogleOther','Meta-ExternalAgent'];
+    public array $aiUserAgents = ['GPTBot', 'CCBot', 'ClaudeBot', 'Claude-Web', 'PerplexityBot', 'Amazonbot', 'Bytespider', 'Google-Extended', 'GoogleOther', 'Meta-ExternalAgent'];
     public string $aiPolicy = 'Allow';
     public string $contactEmail = 'webmaster@example.com';
 

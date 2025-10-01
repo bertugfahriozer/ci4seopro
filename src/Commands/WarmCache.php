@@ -1,6 +1,6 @@
 <?php
 
-namespace bertugfahriozer\ci4SeoPro\Commands;
+namespace bertugfahriozer\ci4seopro\Commands;
 
 use Bertug\SeoPro\Config\Seo;
 use Bertug\SeoPro\Services\SitemapBuilder;
@@ -32,10 +32,10 @@ class WarmCache extends BaseCommand
             $lines[] = ($cfg->aiPolicy === 'Disallow') ? "Disallow: /" : "Allow: /";
             $lines[] = "";
         }
-        if ($cfg->enableSitemap) $lines[] = 'Sitemap: ' . rtrim($cfg->siteUrl,'/') . '/sitemap.xml';
-        if ($cfg->enableNewsSitemap) $lines[] = 'Sitemap: ' . rtrim($cfg->siteUrl,'/') . '/sitemap-news.xml';
-        if ($cfg->enableImageSitemap) $lines[] = 'Sitemap: ' . rtrim($cfg->siteUrl,'/') . '/sitemap-images.xml';
-        if ($cfg->enableVideoSitemap) $lines[] = 'Sitemap: ' . rtrim($cfg->siteUrl,'/') . '/sitemap-videos.xml';
+        if ($cfg->enableSitemap) $lines[] = 'Sitemap: ' . rtrim($cfg->siteUrl, '/') . '/sitemap.xml';
+        if ($cfg->enableNewsSitemap) $lines[] = 'Sitemap: ' . rtrim($cfg->siteUrl, '/') . '/sitemap-news.xml';
+        if ($cfg->enableImageSitemap) $lines[] = 'Sitemap: ' . rtrim($cfg->siteUrl, '/') . '/sitemap-images.xml';
+        if ($cfg->enableVideoSitemap) $lines[] = 'Sitemap: ' . rtrim($cfg->siteUrl, '/') . '/sitemap-videos.xml';
         $cache->save('seo_pro_robots', implode("\n", $lines) . "\n", $ttl);
 
         // llms

@@ -1,6 +1,6 @@
 <?php
 
-namespace bertugfahriozer\ci4SeoPro\Commands;
+namespace bertugfahriozer\ci4seopro\Commands;
 
 use Bertug\SeoPro\Config\Seo;
 use CodeIgniter\CLI\BaseCommand;

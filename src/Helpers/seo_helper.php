@@ -1,6 +1,6 @@
 <?php
 
-use bertugfahriozer\ci4SeoPro\Config\Seo;
+use bertugfahriozer\ci4seopro\Config\Seo;
 
 if (! function_exists('seo_meta')) {
     function seo_meta(array $overrides = []): string
@@ -39,7 +39,7 @@ if (! function_exists('seo_meta')) {
             }
         }
         if ($cfg->enableRss) {
-            $tags[] = '<link rel="alternate" type="application/rss+xml" title="' . esc($cfg->rssTitle) . '" href="' . rtrim($cfg->siteUrl,'/') . '/rss.xml" />';
+            $tags[] = '<link rel="alternate" type="application/rss+xml" title="' . esc($cfg->rssTitle) . '" href="' . rtrim($cfg->siteUrl, '/') . '/rss.xml" />';
         }
 
         return implode("\n", $tags) . "\n";

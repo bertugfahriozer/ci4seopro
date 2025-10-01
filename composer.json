@@ -1,11 +1,26 @@
 {
-  "name": "bertugfahriozer/ci4SeoPro",
+  "name": "bertugfahriozer/ci4seopro",
   "description": "Professional SEO/AI indexing + Sitemap (index) + RSS + News/Image/Video sitemaps for CodeIgniter 4",
-  "keywords": ["codeigniter4", "seo", "sitemap", "rss", "robots.txt", "ai", "llms", "news", "image", "video","e-commerce"],
+  "keywords": [
+    "codeigniter4",
+    "seo",
+    "sitemap",
+    "rss",
+    "robots.txt",
+    "ai",
+    "llms",
+    "news",
+    "image",
+    "video",
+    "e-commerce"
+  ],
   "type": "library",
   "license": "MIT",
   "authors": [
-    { "name": "Bertuğ Fahri ÖZER", "email": "bertugfahriozer@gmail.com" }
+    {
+      "name": "Bertuğ Fahri ÖZER",
+      "email": "bertugfahriozer@gmail.com"
+    }
   ],
   "require": {
     "php": ">=8.1",
@@ -13,7 +28,7 @@
   },
   "autoload": {
     "psr-4": {
-      "bertugfahriozer\\ci4SeoPro\\": "src/"
+      "bertugfahriozer\\ci4seopro\\": "src/"
     },
     "files": [
       "src/Helpers/seo_helper.php"
@@ -23,14 +38,14 @@
     "codeigniter4": {
       "discover": {
         "psr4": [
-          "bertugfahriozer\\ci4SeoPro"
+          "bertugfahriozer\\ci4seopro"
         ],
         "routes": [
-          "bertugfahriozer\\ci4SeoPro\\Config\\Routes"
+          "bertugfahriozer\\ci4seopro\\Config\\Routes"
         ],
         "commands": [
-          "bertugfahriozer\\ci4SeoPro\\Commands\\PingSitemap",
-          "bertugfahriozer\\ci4SeoPro\\Commands\\WarmCache"
+          "bertugfahriozer\\ci4seopro\\Commands\\PingSitemap",
+          "bertugfahriozer\\ci4seopro\\Commands\\WarmCache"
         ],
         "helpers": [
           "seo"
