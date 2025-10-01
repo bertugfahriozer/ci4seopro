@@ -1,0 +1,41 @@
+{
+  "name": "bertugfahriozer/ci4SeoPro",
+  "description": "Professional SEO/AI indexing + Sitemap (index) + RSS + News/Image/Video sitemaps for CodeIgniter 4",
+  "keywords": ["codeigniter4", "seo", "sitemap", "rss", "robots.txt", "ai", "llms", "news", "image", "video","e-commerce"],
+  "type": "library",
+  "license": "MIT",
+  "authors": [
+    { "name": "Bertuğ Fahri ÖZER", "email": "bertugfahriozer@gmail.com" }
+  ],
+  "require": {
+    "php": ">=8.1",
+    "codeigniter4/framework": "^4.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "bertugfahriozer\\ci4SeoPro\\": "src/"
+    },
+    "files": [
+      "src/Helpers/seo_helper.php"
+    ]
+  },
+  "extra": {
+    "codeigniter4": {
+      "discover": {
+        "psr4": [
+          "bertugfahriozer\\ci4SeoPro"
+        ],
+        "routes": [
+          "bertugfahriozer\\ci4SeoPro\\Config\\Routes"
+        ],
+        "commands": [
+          "bertugfahriozer\\ci4SeoPro\\Commands\\PingSitemap",
+          "bertugfahriozer\\ci4SeoPro\\Commands\\WarmCache"
+        ],
+        "helpers": [
+          "seo"
+        ]
+      }
+    }
+  }
+}
