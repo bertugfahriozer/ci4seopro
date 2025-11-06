@@ -1,51 +1,98 @@
 <?php
-
 namespace bertugfahriozer\ci4seopro\Config;
 
 use CodeIgniter\Config\BaseConfig;
 
 class Seo extends BaseConfig
 {
-    public string $siteName = 'My Awesome Site';
-    public string $siteDescription = 'High-quality content.';
-    public string $siteUrl = 'https://example.com';
-    public string $defaultLocale = 'tr';
-    public array  $locales = ['tr', 'en'];
-    public array  $localeDomains = [];
-    public string $defaultImage = 'https://example.com/assets/og-default.jpg';
-    public string $twitterSite  = '@example';
+    /** --------- Arama Motoru Bölümü --------- */
+    public string $siteName   = 'My Site';
+    public string $baseUrl    = '';
+    public array  $locales    = ['tr-TR'];
+    public ?string $defaultLocale = 'tr-TR';
 
-    public bool $httpCaching = true;
-    public int  $httpCacheSeconds = 3600;
-    public bool $useAppCache = true;
-    public int  $appCacheTTL = 3600;
+    public array $templates = [
+        'default' => ['title' => '{title} | {site}', 'desc' => '{excerpt.160}'],
+        'home'    => ['title' => '{site} | {tagline}', 'desc' => '{summary.160}'],
+    ];
 
-    public bool $serveRobots = true;
-    public array $robotsGlobalAllow = ['/'];
-    public array $robotsGlobalDisallow = ['/admin'];
+    public array $rules = [
+        ['pattern' => '/admin*',  'robots' => 'noindex,nofollow'],
+        ['pattern' => '/search*', 'robots' => 'noindex,follow'],
+    ];
 
-    public bool $serveLlms = true;
-    public string $llmsPath = '/llms.txt';
-    public array $aiUserAgents = ['GPTBot', 'CCBot', 'ClaudeBot', 'Claude-Web', 'PerplexityBot', 'Amazonbot', 'Bytespider', 'Google-Extended', 'GoogleOther', 'Meta-ExternalAgent'];
-    public string $aiPolicy = 'Allow';
-    public string $contactEmail = 'webmaster@example.com';
+    /** --------- Çoklu Sitemap --------- */
+    public bool $sitemapIndexEnabled = true;
+    public int  $sitemapChunkSize    = 10000;
+    public array $sitemaps = [
+        'pages' => [
+            'type' => 'static',
+            'items' => [
+                ['loc'=>'/','changefreq'=>'weekly','priority'=>1.0],
+                ['loc'=>'/about','changefreq'=>'monthly','priority'=>0.6],
+            ],
+        ],
+        'blog' => [
+            'type' => 'callback',
+            'callable' => [\App\Models\BlogModel::class, 'sitemapItems'],
+            'hreflang' => true,
+        ],
+    ];
 
-    public bool $enableSitemap = true;
-    public int $sitemapChunkSize = 5000;
-    public array $sitemapProviders = [];
+    /** --------- AI/LLM --------- */
+    public array $aiHeaderRules = [
+        ['pattern'=>'/admin*',  'xrobots'=>'noindex, nofollow, noai'],
+        ['pattern'=>'/media/*.pdf', 'xrobots'=>'noindex, noai'],
+    ];
 
-    public bool $enableRss = true;
-    public string $rssTitle = 'Example RSS';
-    public string $rssDescription = 'Latest updates';
-    public string $rssLanguage = 'tr-TR';
-    public $rssItemsProvider = null;
+    public array $aiTxt = [
+        'contact'    => 'mailto:info@example.com',
+        'policy'     => 'summary-allowed; attribution-required',
+        'license'    => 'CC BY-NC 4.0',
+        'rate-limit' => '1rps; burst=10',
+    ];
 
-    public bool $enableNewsSitemap = true;
-    public $newsProvider = null;
+    public array $aiAgents = [
+        'GPTBot'          => ['allow'=>['/blog*','/docs*'], 'disallow'=>['/admin*','/search*']],
+        'PerplexityBot'   => ['allow'=>['/blog*','/docs*'], 'disallow'=>['/admin*','/search*']],
+        'Google-Extended' => ['allow'=>['/blog*','/docs*'], 'disallow'=>['/admin*','/search*']],
+        '*'               => ['allow'=>['/*'], 'disallow'=>[]],
+    ];
 
-    public bool $enableImageSitemap = true;
-    public $imageProvider = null;
-
-    public bool $enableVideoSitemap = true;
-    public $videoProvider = null;
+    /** --------- FEEDS (RSS/Atom/JSONFeed + LLM Changefeed) --------- */
+    public bool $feedsEnabled = true;
+    public array $feeds = [
+        'blog-rss' => [
+            'format'   => 'rss2',
+            'type'     => 'callback',
+            'callable' => [\App\Models\BlogModel::class, 'feedItems'],
+            'title'    => 'My Site Blog (RSS)',
+            'link'     => '/blog',
+            'desc'     => 'Blog yazıları',
+        ],
+        'blog-atom' => [
+            'format'   => 'atom',
+            'type'     => 'callback',
+            'callable' => [\App\Models\BlogModel::class, 'feedItems'],
+            'title'    => 'My Site Blog (Atom)',
+            'link'     => '/blog',
+            'desc'     => 'Blog yazıları',
+        ],
+        'blog-json' => [
+            'format'   => 'jsonfeed',
+            'type'     => 'callback',
+            'callable' => [\App\Models\BlogModel::class, 'feedItems'],
+            'title'    => 'My Site Blog (JSON Feed)',
+            'link'     => '/blog',
+            'desc'     => 'Blog yazıları',
+        ],
+        'llm-changefeed' => [
+            'format'   => 'json',
+            'type'     => 'callback',
+            'callable' => [\App\Models\ChangefeedModel::class, 'items'],
+            'title'    => 'Content Changefeed',
+            'link'     => '/',
+            'desc'     => 'Recently changed resources for LLMs',
+        ],
+    ];
 }

@@ -28,7 +28,7 @@
   },
   "autoload": {
     "psr-4": {
-      "bertugfahriozer\\ci4seopro\\": "src/"
+      "ci4seopro\\": "src/"
     },
     "files": [
       "src/Helpers/seo_helper.php"
@@ -40,12 +40,10 @@
         "psr4": [
           "bertugfahriozer\\ci4seopro"
         ],
-        "routes": [
-          "bertugfahriozer\\ci4seopro\\Config\\Routes"
-        ],
         "commands": [
           "bertugfahriozer\\ci4seopro\\Commands\\PingSitemap",
-          "bertugfahriozer\\ci4seopro\\Commands\\WarmCache"
+          "bertugfahriozer\\ci4seopro\\Commands\\WarmCache",
+          "bertugfahriozer\\ci4seopro\\Commands\\InstallSeo"
         ],
         "helpers": [
           "seo"
