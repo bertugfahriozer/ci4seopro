@@ -1,5 +1,5 @@
 <?php
-namespace bertugfahriozer\ci4seopro\Controllers\Ai;
+namespace ci4seopro\Controllers\Ai;
 
 use CodeIgniter\Controller;
 

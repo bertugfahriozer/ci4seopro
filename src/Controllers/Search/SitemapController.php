@@ -1,5 +1,5 @@
 <?php
-namespace bertugfahriozer\ci4seopro\Controllers\Search;
+namespace ci4seopro\Controllers\Search;
 
 use CodeIgniter\Controller;
 

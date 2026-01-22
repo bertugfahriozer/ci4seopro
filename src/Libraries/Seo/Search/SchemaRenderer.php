@@ -1,6 +1,6 @@
 <?php
 
-namespace bertugfahriozer\ci4seopro\Libraries\Seo\Search;
+namespace ci4seopro\Libraries\Seo\Search;
 
 class SchemaRenderer
 {

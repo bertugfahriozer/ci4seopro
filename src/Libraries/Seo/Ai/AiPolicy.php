@@ -1,7 +1,7 @@
 <?php
-namespace bertugfahriozer\ci4seopro\Libraries\Seo\Ai;
+namespace ci4seopro\Libraries\Seo\Ai;
 
-use bertugfahriozer\ci4seopro\Config\Seo;
+use ci4seopro\Config\Seo;
 
 class AiPolicy
 {
@@ -9,6 +9,7 @@ class AiPolicy
 
     public function xRobotsFor(string $path): ?string
     {
+        if (!$this->cfg->aiEnabled) return show_403();
         foreach ($this->cfg->aiHeaderRules as $r) {
             if ($this->match($r['pattern'],$path) && !empty($r['xrobots'])) return $r['xrobots'];
         }
@@ -17,6 +18,7 @@ class AiPolicy
 
     public function robotsAiBlocks(): array
     {
+        if (!$this->cfg->aiEnabled) return show_403();
         $out=[];
         foreach ($this->cfg->aiAgents as $agent=>$pol) {
             $out[$agent]=[
@@ -29,6 +31,7 @@ class AiPolicy
 
     public function aiTxtBody(string $baseUrl): string
     {
+        if (!$this->cfg->aiEnabled) return show_403();
         $meta = $this->cfg->aiTxt;
         $lines = ["# ai.txt (experimental)", "site: ".rtrim($baseUrl,'/')];
         foreach($meta as $k=>$v) $lines[] = "{$k}: {$v}";

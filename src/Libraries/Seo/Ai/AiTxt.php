@@ -1,5 +1,5 @@
 <?php
-namespace bertugfahriozer\ci4seopro\Libraries\Seo\Ai;
+namespace ci4seopro\Libraries\Seo\Ai;
 
 class AiTxt
 {

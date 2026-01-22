@@ -1,5 +1,6 @@
 <?php
-namespace bertugfahriozer\ci4seopro\Config;
+
+namespace ci4seopro\Config;
 
 use CodeIgniter\Config\BaseConfig;
 
@@ -25,13 +26,19 @@ class Seo extends BaseConfig
     public bool $sitemapIndexEnabled = true;
     public int  $sitemapChunkSize    = 10000;
     public array $sitemaps = [
-        'pages' => [
+        /* 'pages' => [
             'type' => 'static',
             'items' => [
-                ['loc'=>'/','changefreq'=>'weekly','priority'=>1.0],
-                ['loc'=>'/about','changefreq'=>'monthly','priority'=>0.6],
+                ['loc' => '/', 'changefreq' => 'weekly', 'priority' => 1.0],
+                ['loc' => '/about', 'changefreq' => 'monthly', 'priority' => 0.6],
+                ['loc' => '/contact', 'changefreq' => 'monthly', 'priority' => 0.6],
             ],
-        ],
+        ], */
+        'pages' => [
+                'type' => 'callback',
+                'callable' => [\App\Models\PagesModel::class, 'sitemapItems'],
+                'hreflang' => true,
+            ],
         'blog' => [
             'type' => 'callback',
             'callable' => [\App\Models\BlogModel::class, 'sitemapItems'],
@@ -40,9 +47,10 @@ class Seo extends BaseConfig
     ];
 
     /** --------- AI/LLM --------- */
+    public bool $aiEnabled = true;
     public array $aiHeaderRules = [
-        ['pattern'=>'/admin*',  'xrobots'=>'noindex, nofollow, noai'],
-        ['pattern'=>'/media/*.pdf', 'xrobots'=>'noindex, noai'],
+        ['pattern' => '/admin*',  'xrobots' => 'noindex, nofollow, noai'],
+        ['pattern' => '/media/*.pdf', 'xrobots' => 'noindex, noai'],
     ];
 
     public array $aiTxt = [
@@ -53,10 +61,10 @@ class Seo extends BaseConfig
     ];
 
     public array $aiAgents = [
-        'GPTBot'          => ['allow'=>['/blog*','/docs*'], 'disallow'=>['/admin*','/search*']],
-        'PerplexityBot'   => ['allow'=>['/blog*','/docs*'], 'disallow'=>['/admin*','/search*']],
-        'Google-Extended' => ['allow'=>['/blog*','/docs*'], 'disallow'=>['/admin*','/search*']],
-        '*'               => ['allow'=>['/*'], 'disallow'=>[]],
+        'GPTBot'          => ['allow' => ['/blog*', '/docs*'], 'disallow' => ['/admin*', '/search*']],
+        'PerplexityBot'   => ['allow' => ['/blog*', '/docs*'], 'disallow' => ['/admin*', '/search*']],
+        'Google-Extended' => ['allow' => ['/blog*', '/docs*'], 'disallow' => ['/admin*', '/search*']],
+        '*'               => ['allow' => ['/*'], 'disallow' => []],
     ];
 
     /** --------- FEEDS (RSS/Atom/JSONFeed + LLM Changefeed) --------- */
@@ -94,5 +102,46 @@ class Seo extends BaseConfig
             'link'     => '/',
             'desc'     => 'Recently changed resources for LLMs',
         ],
+    ];
+
+    public array $verify = [
+        // host bazlı meta tag’ler
+        // '*' tüm hostlar için geçerli. İstersen 'example.com' gibi host anahtarı kullan.
+        'meta' => [
+            '*' => [
+                // Google
+                'google-site-verification' => '',
+                // Bing
+                'msvalidate.01'            => '',
+                // Yandex
+                'yandex-verification'      => '',
+                // Pinterest
+                'p:domain_verify'          => '',
+                // Facebook
+                'facebook-domain-verification' => '',
+                // Naver/Baidu gibi ekleyebilirsin:
+                // 'naver-site-verification'  => 'NAVER_TOKEN',
+                // 'baidu-site-verification'  => 'BAIDU_TOKEN',
+            ],
+            // 'example.com' => [ ... hosta özel tokenlar ... ]
+        ],
+
+        // HTML doğrulama dosyaları (filename => exact body)
+        // ör: https://site.com/googleXXXX.html dosyası için:
+        'files' => [
+            // 'googleXXXX.html' => 'google-site-verification: googleXXXX.html',
+        ],
+
+        // well-known / düz metin dosyaları
+        'wellKnown' => [
+            // 'security.txt' => "Contact: mailto:security@site.com\nPolicy: https://site.com/security\n",
+            // 'ads.txt'      => "example.com, pub-0000000000000000, DIRECT, f08c47fec0942fa0\n",
+        ],
+    ];
+
+    public array $pings = [
+        'bing' => true,
+        'yandex' => true,
+        'pubsub' => false
     ];
 }

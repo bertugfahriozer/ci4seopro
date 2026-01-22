@@ -1,12 +1,15 @@
 <?php
 
-namespace bertugfahriozer\ci4seopro\Libraries\Seo\Search;
+namespace ci4seopro\Libraries\Seo\Search;
 
-use Config\Seo;
+use ci4seopro\Libraries\Seo\Search\MetaRenderer;
+use ci4seopro\Libraries\Seo\Search\SchemaRenderer;
+use ci4seopro\Config\Seo;
 
 class SeoManager
 {
     protected array $state = [];
+    protected array $customSchemas = [];
 
     public function __construct(protected Seo $config)
     {
@@ -16,6 +19,7 @@ class SeoManager
             'url'      => current_url() ?: $base,
             'locale'   => service('request')->getLocale() ?? $config->defaultLocale,
             'canonical' => current_url(),
+            'keywords' => [],
         ];
     }
 
@@ -34,6 +38,13 @@ class SeoManager
         if ($d !== null) $this->state['excerpt'] = $d;
         return $this->state['__desc'] ?? ($this->state['excerpt'] ?? '');
     }
+    public function keywords($kw = []): self
+    {
+        if ($kw) {
+            $this->state['keywords'] = is_array($kw) ? $kw : array_map('trim', explode(',', $kw));
+        }
+        return $this;
+    }
 
     public function renderHead(): string
     {
@@ -41,10 +52,13 @@ class SeoManager
         $this->renderTemplates();
         $meta   = (new MetaRenderer())->build($this->state);
         $schema = (new SchemaRenderer())->build($this->state);
+        foreach ($this->customSchemas as $c) {
+            $schema .= '<script type="application/ld+json">' . json_encode($c, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) . '</script>' . "\n";
+        }
         return $meta . $schema;
     }
 
-    public function injectIntoHtml(string $html, array $ctx = []): string
+    public function injectIntoHtml(?string $html='', array $ctx = []): string
     {
         $this->state = array_merge($this->state, $ctx);
         $head = $this->renderHead();
@@ -103,5 +117,11 @@ class SeoManager
     {
         $rx = '#^' . str_replace(['*'], ['.*'], preg_quote($pattern, '#')) . '$#u';
         return (bool)preg_match($rx, $path);
+    }
+
+    public function addSchema(array $jsonld): self
+    {
+        $this->customSchemas[] = $jsonld;
+        return $this;
     }
 }

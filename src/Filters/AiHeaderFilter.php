@@ -1,5 +1,5 @@
 <?php
-namespace bertugfahriozer\ci4seopro\Filters;
+namespace ci4seopro\Filters;
 
 use CodeIgniter\Filters\FilterInterface;
 use CodeIgniter\HTTP\RequestInterface;
