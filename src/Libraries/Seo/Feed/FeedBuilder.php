@@ -47,6 +47,7 @@ class FeedBuilder
         $fid=$link.'/#atom'; $x=['<?xml version="1.0" encoding="UTF-8"?>','<feed xmlns="http://www.w3.org/2005/Atom">','<title>'.esc($title).'</title>','<id>'.esc($fid).'</id>','<link href="'.esc($link).'" />'];
         foreach($items as $it){ $u=$base.($it['url']??'/'); $id=!empty($it['id'])?$it['id']:$u; $upd=!empty($it['date'])?gmdate('c',strtotime($it['date'])):gmdate('c'); $x[]='<entry>'; $x[]='<title>'.esc($it['title']??'').'</title>'; $x[]='<id>'.esc($id).'</id>'; $x[]='<link href="'.esc($u).'" />'; $x[]='<updated>'.$upd.'</updated>'; if(!empty($it['summary']))$x[]='<summary>'.esc($it['summary']).'</summary>'; if(!empty($it['author']))$x[]='<author><name>'.esc($it['author']).'</name></author>'; if(!empty($it['image']))$x[]='<link rel="enclosure" href="'.esc($base.$it['image']).'" type="image/jpeg" />'; $x[]='</entry>'; }
         $x[]='</feed>'; return implode("\n",$x);
+    }
 
     protected function jsonfeed(string $title,string $link,string $desc,array $items,string $base,int $page,int $limit): string
     {
