@@ -2,9 +2,11 @@
 
 // Robots
 $routes->get('robots.txt', '\ci4seopro\Controllers\Search\RobotsController::index');
-// Sitemap INDEX ve parçalar
-$routes->get('sitemap.xml', '\ci4seopro\Controllers\Search\SitemapController::index');
+// Sitemap INDEX, chunks ve stylesheet
+$routes->get('sitemap.xml',            '\ci4seopro\Controllers\Search\SitemapController::index');
 $routes->get('sitemap-(:segment).xml', '\ci4seopro\Controllers\Search\SitemapController::chunk/$1');
+$routes->get('sitemap.xsl',            '\ci4seopro\Controllers\Search\SitemapStyleController::xsl');
+$routes->get('sitemap.css',            '\ci4seopro\Controllers\Search\SitemapStyleController::css');
 
 // AI / GEO — llms.txt ve ai.txt GEO etkinse v2 endpoint'e yönlenir
 if ((new \ci4seopro\Config\Seo())->geoEnabled) {
