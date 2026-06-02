@@ -14,7 +14,7 @@ class SitemapBuilder
         $base = rtrim($this->cfg->baseUrl ?: site_url('/'), '/');
         $xml = [
             '<?xml version="1.0" encoding="UTF-8"?>',
-            '<?xml-stylesheet type="text/xsl" href="/sitemap.xsl"?>',
+            "<?xml-stylesheet type=\"text/xsl\" href=\"{$base}/sitemap.xsl\"?>",
             '<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'
         ];
         foreach (array_keys($this->cfg->sitemaps) as $name) {
@@ -35,7 +35,7 @@ class SitemapBuilder
         if (!empty($def['image'])) $ns[] = 'xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"';
         if (!empty($def['video'])) $ns[] = 'xmlns:video="http://www.google.com/schemas/sitemap-video/1.1"';
         if (!empty($def['news'])) $ns[] = 'xmlns:news="http://www.google.com/schemas/sitemap-news/0.9"';
-        $xml = ['<?xml version="1.0" encoding="UTF-8"?>', '<?xml-stylesheet type="text/xsl" href="/sitemap.xsl"?>', '<urlset ' . implode(' ', $ns) . '>'];
+        $xml = ['<?xml version="1.0" encoding="UTF-8"?>', "<?xml-stylesheet type=\"text/xsl\" href=\"{$base}/sitemap.xsl\"?>", '<urlset ' . implode(' ', $ns) . '>'];
         foreach ($items as $it) {
             $loc = $base . ($it['loc'] ?? '/');
             $xml[] = '<url>';

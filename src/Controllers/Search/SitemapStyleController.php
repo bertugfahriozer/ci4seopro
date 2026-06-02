@@ -4,35 +4,31 @@ declare(strict_types=1);
 namespace ci4seopro\Controllers\Search;
 
 use CodeIgniter\Controller;
+use CodeIgniter\HTTP\ResponseInterface;
 
 class SitemapStyleController extends Controller
 {
-    protected string $assetPath = __DIR__ . '/../../Assets/';
-
-    public function xsl(): void
+    public function xsl(): ResponseInterface
     {
-        $this->serveAsset('sitemap.xsl', 'text/xsl');
+        return $this->serveAsset('sitemap.xsl', 'text/xsl');
     }
 
-    public function css(): void
+    public function css(): ResponseInterface
     {
-        $this->serveAsset('sitemap.css', 'text/css');
+        return $this->serveAsset('sitemap.css', 'text/css');
     }
 
-    private function serveAsset(string $file, string $contentType): void
+    private function serveAsset(string $file, string $contentType): ResponseInterface
     {
-        $path = realpath($this->assetPath . $file);
+        $path = realpath(__DIR__ . '/../../Assets/' . $file);
 
-        if (!$path || !file_exists($path)) {
-            $this->response->setStatusCode(404)->setBody('Not Found')->send();
-            exit;
+        if ($path === false || !is_file($path)) {
+            return $this->response->setStatusCode(404)->setBody('Not Found');
         }
 
-        $this->response
+        return $this->response
             ->setContentType($contentType)
             ->setHeader('Cache-Control', 'public, max-age=86400')
-            ->setBody(file_get_contents($path))
-            ->send();
-        exit;
+            ->setBody(file_get_contents($path));
     }
 }
