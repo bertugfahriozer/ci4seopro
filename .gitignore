@@ -36,3 +36,10 @@ nb-configuration.xml
 
 # Visual Studio Code
 .vscode/
+tests
+vendor
+CLAUDE.md
+docs
+composer.lock
+phpunit.xml.dist
+.phpunit.result.cache

@@ -62,3 +62,42 @@ return [
   // JSON Feed için 'content' ekleyebilirsiniz
 ];
 ```
+
+## GEO (Generative Engine Optimization) Aktivasyonu
+
+### 1) Config Aç
+`app/Config/Seo.php` içinde:
+```php
+public bool $geoEnabled = true;
+
+public array $geoOrganization = [
+    'name'    => 'Site Adı',
+    'url'     => 'https://example.com',
+    'logo'    => '/logo.png',
+    'sameAs'  => ['https://twitter.com/example'],
+    'founder' => 'Ad Soyad',
+];
+```
+
+### 2) GeoFilter Kaydet
+`app/Config/Filters.php`:
+```php
+'after' => [
+    \ci4seopro\Filters\SearchSeoFilter::class,
+    \ci4seopro\Filters\AiHeaderFilter::class,
+    \ci4seopro\Filters\GeoFilter::class,
+],
+```
+
+### 3) Controller'da Kullan
+```php
+service('geo')
+    ->set('author', 'Ali Veli')
+    ->set('datePublished', $post->created_at)
+    ->addFaq([['q' => 'Soru?', 'a' => 'Cevap.']]);
+```
+
+### 4) Yeni Endpoint'ler
+- `/api/geo/chunk?url=/blog/post-1` — RAG için içerik parçalama
+- `/.well-known/ai-plugin.json` — AI plugin manifest (`$geoAiManifest = true` gerekir)
+- `/llms.txt` — v1 + v2 birleşik çıktı

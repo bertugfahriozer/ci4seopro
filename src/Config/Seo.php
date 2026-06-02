@@ -144,4 +144,40 @@ class Seo extends BaseConfig
         'yandex' => true,
         'pubsub' => false
     ];
+
+    /** --------- GEO (Generative Engine Optimization) --------- */
+    public bool $geoEnabled = false;
+
+    public array $geoOrganization = [
+        'name'    => '',
+        'url'     => '',
+        'logo'    => '',
+        'sameAs'  => [],
+        'founder' => '',
+    ];
+
+    public array $geoEeat = [
+        'author'    => '',
+        'authorUrl' => '',
+        'publisher' => '',
+    ];
+
+    public array $geoSpeakable = [];
+
+    public array $geoLlmsTxt = [
+        'title'       => '',
+        'description' => '',
+        'sections'    => [],
+    ];
+
+    public bool $geoChunkEndpoint = true;
+    public int  $geoChunkSize     = 512;
+
+    public bool  $geoAiManifest = false;
+    public array $geoManifest   = [
+        'name'          => '',
+        'description'   => '',
+        'contact_email' => '',
+        'api_url'       => '/api/geo',
+    ];
 }
