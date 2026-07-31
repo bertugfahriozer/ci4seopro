@@ -11,22 +11,25 @@ class Services extends BaseService
 {
     public static function seosearch(?Seo $config = null, bool $getShared = true): SeoManager
     {
-        if ($getShared) return static::getSharedInstance('seosearch', $config);
-        $config = $config ?? config('seo');
+        if ($getShared)
+            return static::getSharedInstance('seosearch', $config);
+        $config = $config ?? config('Seo');
         return new SeoManager($config);
     }
 
     public static function seopolicy(?Seo $config = null, bool $getShared = true): AiPolicy
     {
-        if ($getShared) return static::getSharedInstance('seopolicy', $config);
-        $config = $config ?? config('seo');
+        if ($getShared)
+            return static::getSharedInstance('seopolicy', $config);
+        $config = $config ?? config('Seo');
         return new AiPolicy($config);
     }
 
     public static function geo(?Seo $config = null, bool $getShared = true): GeoManager
     {
-        if ($getShared) return static::getSharedInstance('geo', $config);
-        $config = $config ?? config('seo');
+        if ($getShared)
+            return static::getSharedInstance('geo', $config);
+        $config = $config ?? config('Seo');
         return new GeoManager($config);
     }
 }
